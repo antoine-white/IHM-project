@@ -28,8 +28,8 @@ public class MainFrame extends JFrame{
 
     private void createMainLayout(){
         this.add(this.titleBox(),BorderLayout.NORTH);
-
         this.add(this.quitBox(),BorderLayout.SOUTH);
+        this.add(centralBox(leftVerticalBox(),new Field(),rightVerticalBox()),BorderLayout.CENTER); 
     }
 
     private Box titleBox(){
@@ -44,6 +44,32 @@ public class MainFrame extends JFrame{
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
         box.add(new QuitButton());
+        return box;
+    }
+
+    private Box leftVerticalBox(){
+        Box box = Box.createVerticalBox();
+        box.add(new ReinitializationButton());
+        box.add(Box.createVerticalStrut(10));
+        box.add(new RandomInitializationButton());
+        return box;
+    }
+    private Box rightVerticalBox(){
+        Box box = Box.createVerticalBox();
+        box.add(new MagnifyingGlassButton());
+        box.add(Box.createVerticalStrut(10));
+        box.add(new LabelList());
+        return box;
+    }
+
+    // CHANGER LE JPANEL PAR LE TERRAIN
+    private Box centralBox(Box b1, Field field ,Box b2){
+        Box box = Box.createHorizontalBox();
+        box.add(b1);
+        box.add(Box.createHorizontalStrut(20));
+        box.add(field);
+        box.add(Box.createHorizontalStrut(20));
+        box.add(b2);
         return box;
     }
 }
