@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class PlayPauseButton extends JButton{
 
     private static final String PAUSE_TXT = "Pause";
-    private static final String PLAY_TXT = "Play";
+    private static final String PLAY_TXT = "Jouer";
 
     //TODO : relier à la simulation 
     public PlayPauseButton(){
