@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class QuitButton extends JButton {
 
     public QuitButton() {
-        super("Quit");
+        super("Quitter");
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
