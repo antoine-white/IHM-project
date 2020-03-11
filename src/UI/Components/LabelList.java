@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class LabelList{
+public class LabelList extends Box{
 
     private JLabel[] labels = {
         new JLabel("nbGraines: "),
@@ -12,16 +12,19 @@ public class LabelList{
     };
 
     public LabelList() {
-        Box haut = createLabelList(this.labels);
+        super(BoxLayout.PAGE_AXIS);
+        for(JLabel l : labels){
+            this.add(l); 
+       }
     }
-
+    /*
     public Box createLabelList(JLabel [] labels){
         Box box = Box.createVerticalBox(); 
         for(JLabel l : labels){
             box.add(l); 
        }
        return box; 
-    }
+    } */
     
 
 }
