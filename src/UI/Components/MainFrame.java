@@ -26,15 +26,24 @@ public class MainFrame extends JFrame{
         this.createMainLayout();
     }
 
-    public void createMainLayout(){
+    private void createMainLayout(){
         this.add(this.titleBox(),BorderLayout.NORTH);
+
+        this.add(this.quitBox(),BorderLayout.SOUTH);
     }
 
-    public Box titleBox(){
+    private Box titleBox(){
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
         box.add(this.title);
         box.add(Box.createHorizontalGlue());
+        return box;
+    }
+
+    private Box quitBox(){
+        Box box = Box.createHorizontalBox();
+        box.add(Box.createHorizontalGlue());
+        box.add(new QuitButton());
         return box;
     }
 }
