@@ -1,6 +1,7 @@
 package UI.Components;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 import UI.consts.*;
