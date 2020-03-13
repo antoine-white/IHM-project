@@ -13,8 +13,8 @@ public class PlayPauseButton extends JButton{
     public PlayPauseButton(){
         //super(PlayPauseButton.PAUSE_TXT);
         super(); 
-        this.isPlay = true; 
-        this.setJButtonIcon(this.isPlay);
+        PlayPauseButton.isPlay = true;
+        this.setJButtonIcon(PlayPauseButton.isPlay);
         this.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {/*
                 PlayPauseButton emitter = ((PlayPauseButton)e.getSource());

@@ -18,7 +18,6 @@ public class MainFrame extends JFrame{
         f.setLocationRelativeTo(null);   
         f.setVisible(true);
     }
-
     public MainFrame(){
         super();/*
         this.panel = new JPanel(); 
@@ -29,13 +28,25 @@ public class MainFrame extends JFrame{
         this.title = new JLabel(MainFrame.titleStr);
         this.title.setFont(ConstFonts.TITLE);
         this.createMainLayout(); 
-        this.setPreferredSize(new Dimension(800, 750));  
-        this.setLocationRelativeTo(null);  
-        //this.setResizable(false); 
+        this.frameParameter();
+        this.setFrameIcon();
+        this.setTitle("Logiciel Mehdi-Antoine");        
+        //this.setIconImages(new ImageIcon("UI/Resources/fourmi_logo.png").getImage());
         //this.createMainLayout(this.panel);
         //this.add(panel);
     }
-    
+    private void setFrameIcon(){
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image tmp = kit.getImage("UI/Resources/m_logo.jpg");
+        Image icone = tmp.getScaledInstance( 48, 48,  java.awt.Image.SCALE_SMOOTH ) ;  
+        this.setIconImage(icone);
+    }
+    private void frameParameter(){
+        this.setPreferredSize(new Dimension(800, 750));  
+        this.setMinimumSize(new Dimension(800, 750));  
+        this.setLocationRelativeTo(null);  
+        //this.setResizable(false); 
+    }    
     private void createMainLayout(){
         this.add(this.titleBox(),BorderLayout.NORTH);
         this.add(this.quitBox(),BorderLayout.SOUTH);
@@ -48,7 +59,6 @@ public class MainFrame extends JFrame{
         pan.add(quitBox(),BorderLayout.SOUTH);
     }
     */
-
     private Box titleBox(){
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
@@ -56,20 +66,19 @@ public class MainFrame extends JFrame{
         box.add(Box.createHorizontalGlue());
         return box;
     }
-
     private Box quitBox(){
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
         box.add(new QuitButton());
         return box;
     }
-
     private Box leftVerticalBox(){
         Box box = Box.createVerticalBox();
         box.add(new ReinitializationButton());
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation du jeu")); 
         box.add(Box.createVerticalStrut(10));
+
         box.add(new RandomInitializationButton());
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation aleatoire ")); 
@@ -86,16 +95,14 @@ public class MainFrame extends JFrame{
         box.add(new LabelList());
         return box;
     }
-
-    // CHANGER LE JPANEL PAR LE TERRAIN
     private Box centralBox(Box b1, Field field ,Box b2){
         Box box = Box.createHorizontalBox();
         //box.add(Box.createHorizontalStrut(20));
         box.add(Box.createHorizontalGlue());
         box.add(b1);
-        box.add(Box.createHorizontalStrut(15));
+        box.add(Box.createHorizontalStrut(5));
         box.add(field);
-        box.add(Box.createHorizontalStrut(15));
+        box.add(Box.createHorizontalGlue());
         box.add(b2);
         return box;
     }
