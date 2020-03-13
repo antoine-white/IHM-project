@@ -8,6 +8,16 @@ public class QuitButton extends JButton {
 
     public QuitButton() {
         super("Quitter");
+        //super(); 
+        //ImageIcon img = new ImageIcon("src/UI/Images/quitbut2.jpg");
+          /*  ImageIcon img = new ImageIcon("/Resources/13694.jpg");
+            //ImageIcon img = new ImageIcon("C:/Users/RKoub/Desktop/wallpaper/13694.jpg");
+            Image newimg = img.getImage().getScaledInstance( 500, 500,  java.awt.Image.SCALE_SMOOTH ) ;  
+            ImageIcon tmp = new ImageIcon( newimg );
+            this.setIcon(tmp); 
+            */
+        
+        //this.setPreferredSize(new Dimension(200,200));
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -16,6 +26,8 @@ public class QuitButton extends JButton {
                     System.exit(0);
             }
         });
+        validate();
+       
     }
 
     
