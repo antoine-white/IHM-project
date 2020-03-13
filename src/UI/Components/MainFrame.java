@@ -31,7 +31,7 @@ public class MainFrame extends JFrame{
         this.createMainLayout(); 
         this.setPreferredSize(new Dimension(800, 750));  
         this.setLocationRelativeTo(null);  
-        this.setResizable(false); 
+        //this.setResizable(false); 
         //this.createMainLayout(this.panel);
         //this.add(panel);
     }
@@ -81,6 +81,8 @@ public class MainFrame extends JFrame{
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("    Loupe")); 
         box.add(Box.createVerticalStrut(10));
+        box.add(new PlayPauseButton());
+        box.add(Box.createVerticalStrut(10));
         box.add(new LabelList());
         return box;
     }
@@ -91,9 +93,9 @@ public class MainFrame extends JFrame{
         //box.add(Box.createHorizontalStrut(20));
         box.add(Box.createHorizontalGlue());
         box.add(b1);
-        box.add(Box.createHorizontalGlue());
+        box.add(Box.createHorizontalStrut(15));
         box.add(field);
-        box.add(Box.createHorizontalGlue());
+        box.add(Box.createHorizontalStrut(15));
         box.add(b2);
         return box;
     }
