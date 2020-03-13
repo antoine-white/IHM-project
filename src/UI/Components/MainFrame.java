@@ -15,6 +15,7 @@ public class MainFrame extends JFrame{
     public static void main(String[] args) {
         MainFrame f = new MainFrame();
         f.pack();
+        f.setLocationRelativeTo(null);   
         f.setVisible(true);
     }
 
@@ -28,6 +29,9 @@ public class MainFrame extends JFrame{
         this.title = new JLabel(MainFrame.titleStr);
         this.title.setFont(ConstFonts.TITLE);
         this.createMainLayout(); 
+        this.setPreferredSize(new Dimension(800, 750));  
+        this.setLocationRelativeTo(null);  
+        this.setResizable(false); 
         //this.createMainLayout(this.panel);
         //this.add(panel);
     }
@@ -63,13 +67,19 @@ public class MainFrame extends JFrame{
     private Box leftVerticalBox(){
         Box box = Box.createVerticalBox();
         box.add(new ReinitializationButton());
+        box.add(Box.createVerticalStrut(5));
+        box.add(new JLabel("Reinitialisation du jeu")); 
         box.add(Box.createVerticalStrut(10));
         box.add(new RandomInitializationButton());
+        box.add(Box.createVerticalStrut(5));
+        box.add(new JLabel("Reinitialisation aleatoire ")); 
         return box;
     }
     private Box rightVerticalBox(){
         Box box = Box.createVerticalBox();
         box.add(new MagnifyingGlassButton());
+        box.add(Box.createVerticalStrut(5));
+        box.add(new JLabel("    Loupe")); 
         box.add(Box.createVerticalStrut(10));
         box.add(new LabelList());
         return box;
