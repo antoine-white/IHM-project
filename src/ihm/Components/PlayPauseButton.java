@@ -1,4 +1,4 @@
-package UI.Components;
+package ihm.Components;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -40,13 +40,13 @@ public class PlayPauseButton extends JButton{
 
     private void setJButtonIcon(Boolean isIconPlay){
         if(isIconPlay){
-            ImageIcon img = new ImageIcon("UI/Resources/circleplay.png");
+            ImageIcon img = new ImageIcon("ihm/Resources/circleplay.png");
             Image newimg = img.getImage().getScaledInstance( 85, 70,  java.awt.Image.SCALE_SMOOTH ) ;  
             ImageIcon tmp = new ImageIcon(newimg);
             this.setIcon(tmp); 
             
         } else {
-            ImageIcon img = new ImageIcon("UI/Resources/circlepause.png"); 
+            ImageIcon img = new ImageIcon("ihm/Resources/circlepause.png"); 
             Image newimg = img.getImage().getScaledInstance( 85, 70,  java.awt.Image.SCALE_SMOOTH ) ;  
             ImageIcon tmp = new ImageIcon(newimg);
             this.setIcon(tmp); 

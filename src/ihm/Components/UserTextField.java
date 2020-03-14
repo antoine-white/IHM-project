@@ -1,4 +1,4 @@
-package UI.Components;
+package ihm.Components;
 
 import java.awt.*;
 import javax.swing.*;

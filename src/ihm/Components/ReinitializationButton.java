@@ -1,4 +1,4 @@
-package UI.Components;
+package ihm.Components;
 
 import java.awt.*;
 import javax.swing.*;
@@ -9,7 +9,7 @@ public class ReinitializationButton extends JButton {
     public ReinitializationButton() {
         //super("Reinitialisation du jeu ");
         super(); 
-        ImageIcon img = new ImageIcon("UI/Resources/initialization.png");
+        ImageIcon img = new ImageIcon("ihm/Resources/initialization.png");
         Image newimg = img.getImage().getScaledInstance( 85, 70,  java.awt.Image.SCALE_SMOOTH ) ;  
         ImageIcon tmp = new ImageIcon( newimg );
         this.setIcon(tmp); 
