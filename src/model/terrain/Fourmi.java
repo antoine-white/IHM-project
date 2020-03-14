@@ -1,4 +1,4 @@
-package Noyau.terrain;
+package model.terrain;
 
 import java.awt.Point ; 
 /** 
@@ -26,7 +26,7 @@ public class Fourmi {
     }
     
     /**
-     * Crée une fourmi en (1,1) qui ne porte rien
+     * Crée une fourmi en (1,1) qihm ne porte rien
      */
     public Fourmi (){
 	this(1,1,false);
@@ -58,7 +58,7 @@ public class Fourmi {
      * Retourne une probabilité (valeur comprise entre 0.0 et 1.0)
      *          en fonction d'un entier >= 0
      * Cette proba sera utilisée pour savoir si la fourmi prend une graine
-     *       en fonction du nombre de graines qui sont autour de la fourmi 
+     *       en fonction du nombre de graines qihm sont autour de la fourmi 
      * @param nbGraines  entier
      * @return           probabilité de prise
      */
@@ -69,7 +69,7 @@ public class Fourmi {
      *  Retourne une probabilité (valeur comprise entre 0.0 et 1.0)
      *          en fonction d'un entier >= 0
      *  Cette proba sera utilisée pour savoir si la fourmi pose une graine
-     *       en fonction du nombre de graines qui sont autour de la fourmi 
+     *       en fonction du nombre de graines qihm sont autour de la fourmi 
      * @param nbGraines   entier 
      * @return            probabilité de dépot
      */

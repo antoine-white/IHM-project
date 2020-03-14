@@ -1,4 +1,4 @@
-package UI.consts;
+package ihm.consts;
 
 import java.awt.Font;
 

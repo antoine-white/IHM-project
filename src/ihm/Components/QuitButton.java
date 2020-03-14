@@ -1,4 +1,4 @@
-package UI.Components;
+package ihm.Components;
 
 import java.awt.*;
 import javax.swing.*;
@@ -7,10 +7,8 @@ import java.awt.event.*;
 public class QuitButton extends JButton {
 
     public QuitButton() {
-        //super("Quitter");
         super(); 
-        //ImageIcon img = new ImageIcon("src/UI/Images/quitbut2.jpg");
-        ImageIcon img = new ImageIcon("UI/Resources/quit_logo.jpg");
+        ImageIcon img = new ImageIcon("ihm/Resources/quit_logo.jpg");
         //ImageIcon img = new ImageIcon("C:/Users/RKoub/Desktop/wallpaper/13694.jpg");
         Image newimg = img.getImage().getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;  
         ImageIcon tmp = new ImageIcon( newimg );
