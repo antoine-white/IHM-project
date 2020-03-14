@@ -43,7 +43,7 @@ public class MainFrame extends JFrame{
     }
     private void frameParameter(){
         this.setPreferredSize(new Dimension(800, 750));  
-        this.setMinimumSize(new Dimension(800, 750));  
+        this.setMinimumSize(new Dimension(800, 650));  
         this.setLocationRelativeTo(null);  
         //this.setResizable(false); 
     }    
