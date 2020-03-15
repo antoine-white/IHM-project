@@ -10,7 +10,7 @@ import ihm.consts.*;
 public class MainFrame extends JFrame{
 
     private JLabel title;
-    private JPanel panel; 
+    //private JPanel panel; 
     private Fourmiliere fourmiliere;
     private static final String titleStr = "Simulation de fourmilliere";
     public static void main(String[] args) {
