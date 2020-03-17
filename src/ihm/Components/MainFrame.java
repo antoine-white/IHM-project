@@ -17,6 +17,7 @@ public class MainFrame extends JFrame{
         MainFrame f = new MainFrame();
         f.pack();
         f.setLocationRelativeTo(null);   
+        f.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         f.setVisible(true);
     }
     public MainFrame(){
