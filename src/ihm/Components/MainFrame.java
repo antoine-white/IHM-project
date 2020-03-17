@@ -10,6 +10,7 @@ import ihm.consts.*;
 public class MainFrame extends JFrame{
 
     private JLabel title;
+    private Field field;
     //private JPanel panel; 
     private Fourmiliere fourmiliere;
     private static final String titleStr = "Simulation de fourmilliere";
@@ -23,18 +24,18 @@ public class MainFrame extends JFrame{
     public MainFrame(){
         super();
         //TEMP :
-        Fourmiliere f = new Fourmiliere(20, 20);
+        Fourmiliere f = new Fourmiliere(100, 100);
         // On crée quelques murs
-        for (int i = 1; i < 4; i++)
+        for (int i = 1; i < 9; i++)
             f.setMur(i, 2 * i, true);
         // On ajoute 3 fourmis dans la fourmilière
         f.ajouteFourmi(1, 1);
         f.ajouteFourmi(2, 2);
         f.ajouteFourmi(3, 3);
         // On pose des graines
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 30; i++) {
             f.setQteGraines(2 * i, i, 1);
-            f.setQteGraines(2 * i, 11 - i, 1);
+            f.setQteGraines(2 * i, 90 - i, 1);
         }
         this.fourmiliere = f;
         //////////////////////////////////
@@ -47,6 +48,7 @@ public class MainFrame extends JFrame{
         this.setForeground(ConstColors.TEXT);
         this.title = new JLabel(MainFrame.titleStr);
         this.title.setFont(ConstFonts.TITLE);
+        this.field = new Field(this);
         this.createMainLayout(); 
         this.frameParameter();
         this.setFrameIcon();
@@ -54,6 +56,7 @@ public class MainFrame extends JFrame{
         //this.setIconImages(new ImageIcon("ihm/Resources/fourmi_logo.png").getImage());
         //this.createMainLayout(this.panel);
         //this.add(panel);
+        
     }
     private void setFrameIcon(){
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -70,7 +73,7 @@ public class MainFrame extends JFrame{
     private void createMainLayout(){
         this.add(this.titleBox(),BorderLayout.NORTH);
         this.add(this.quitBox(),BorderLayout.SOUTH);
-        this.add(centralBox(leftVerticalBox(),new Field(this.fourmiliere),rightVerticalBox()),BorderLayout.CENTER); 
+        this.add(centralBox(leftVerticalBox(),this.field,rightVerticalBox()),BorderLayout.CENTER); 
     } 
     /*
     private void createMainLayout(JPanel pan){
@@ -94,7 +97,7 @@ public class MainFrame extends JFrame{
     }
     private Box leftVerticalBox(){
         Box box = Box.createVerticalBox();
-        box.add(new ReinitializationButton());
+        box.add(new ReinitializationButton(this));
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation du jeu")); 
         box.add(Box.createVerticalStrut(10));
@@ -125,5 +128,14 @@ public class MainFrame extends JFrame{
         box.add(Box.createHorizontalGlue());
         box.add(b2);
         return box;
+    }    
+
+    public void cleanField(){
+        this.fourmiliere = new Fourmiliere(this.fourmiliere.getLargeur(), this.fourmiliere.getHauteur());
+        this.field.repaint();
+    }
+
+    public Fourmiliere getFourmiliere() {
+        return fourmiliere;
     }
 }

@@ -9,7 +9,7 @@ import ihm.consts.*;
 
 public class Field extends JPanel implements KeyListener, MouseListener, MouseWheelListener {
 
-    private Fourmiliere anthill;
+    private MainFrame mainFrame;
     private boolean shiftOn;
 
     private static final Dimension MIN_SIZE = new Dimension(200, 200);
@@ -24,12 +24,12 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      * 
      * @param f
      */
-    public Field(Fourmiliere f) {
+    public Field(MainFrame mFrame) {
         super();
         this.setPreferredSize(Field.INITIAL_SIZE);
         this.setMinimumSize(Field.MIN_SIZE);
         this.setBorder(BorderFactory.createLineBorder(ConstColors.BORDER));
-        this.anthill = f;
+        this.mainFrame = mFrame;
         this.shiftOn = false;
         this.addKeyListener(this);
         this.addMouseListener(this);
@@ -41,8 +41,8 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        int largeur = this.anthill.getLargeur();
-        int hauteur = this.anthill.getHauteur();
+        int largeur = this.mainFrame.getFourmiliere().getLargeur();
+        int hauteur = this.mainFrame.getFourmiliere().getHauteur();
         for (int i = 0; i < largeur; i++) {
             int curr = (width * i / largeur);
             int nextOffset = (width * (i + 1) / largeur) - (width * i / largeur);
@@ -50,7 +50,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
                 g.setColor(colorAtPos(i, j));
                 g.fillRect(curr, (height * j / hauteur), nextOffset,
                         (height * (j + 1) / hauteur) - (height * j / hauteur));
-                if (anthill.contientFourmi(i, j)) {
+                if (mainFrame.getFourmiliere().contientFourmi(i, j)) {
                     g.setColor(Field.FOURMI);
                     g.fillOval(curr, (height * j / hauteur), nextOffset, nextOffset);
                 }
@@ -66,10 +66,10 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      *  for instance Field.WALL if there is a wall
      */
     private Color colorAtPos(int x, int y) {
-        if (this.anthill.getMur(x, y)) {
+        if (this.mainFrame.getFourmiliere().getMur(x, y)) {
             return Field.WALL;
         } else {
-            int nb_graine = this.anthill.getQteGraines(x, y);
+            int nb_graine = this.mainFrame.getFourmiliere().getQteGraines(x, y);
             if (nb_graine == 0) {
                 return Field.EMPTY;
             } else {
@@ -90,8 +90,8 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      */
     private Point getCoordFromPoint(Point evtPoint){
         return new Point(
-            (int) ((int)((double)evtPoint.getX())/((double)this.getWidth()) * (double)this.anthill.getLargeur()),
-            (int) ((int)((double)evtPoint.getY())/((double)this.getHeight()) * (double)this.anthill.getHauteur())
+            (int) ((int)((double)evtPoint.getX())/((double)this.getWidth()) * (double)this.mainFrame.getFourmiliere().getLargeur()),
+            (int) ((int)((double)evtPoint.getY())/((double)this.getHeight()) * (double)this.mainFrame.getFourmiliere().getHauteur())
         );        
     }
 
@@ -101,7 +101,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      * @param p the point in the anthill
      */
     private void destroyCreateWall(Point p){
-        this.anthill.setMur(p.x, p.y, !this.anthill.getMur(p.x, p.y));
+        this.mainFrame.getFourmiliere().setMur(p.x, p.y, !this.mainFrame.getFourmiliere().getMur(p.x, p.y));
         this.repaint();
     }
 
@@ -110,7 +110,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      * @param p the point in the anthill
      */
     private void addAnt(Point p){
-        this.anthill.ajouteFourmi(p.x, p.y);
+        this.mainFrame.getFourmiliere().ajouteFourmi(p.x, p.y);
         this.repaint();
     }
 
@@ -121,7 +121,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      */
     private void addSeed(Point p, boolean adding){
         int toAdd = (adding?1:-1);
-        this.anthill.setQteGraines(p.x, p.y, this.anthill.getQteGraines(p.x, p.y) + toAdd);
+        this.mainFrame.getFourmiliere().setQteGraines(p.x, p.y, this.mainFrame.getFourmiliere().getQteGraines(p.x, p.y) + toAdd);
         this.repaint();
     }
 
