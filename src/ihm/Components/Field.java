@@ -9,7 +9,7 @@ import ihm.consts.*;
 
 public class Field extends JPanel implements KeyListener, MouseListener, MouseWheelListener {
 
-    private Fourmiliere fourmiliere;
+    private Fourmiliere anthill;
     private boolean shiftOn;
 
     private static final Dimension MIN_SIZE = new Dimension(200, 200);
@@ -20,12 +20,16 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
     private static final Color FOURMI = Color.GREEN;
     private static final int SHIFT_KEY_CODE = 16;
 
+    /**
+     * 
+     * @param f
+     */
     public Field(Fourmiliere f) {
         super();
         this.setPreferredSize(Field.INITIAL_SIZE);
         this.setMinimumSize(Field.MIN_SIZE);
         this.setBorder(BorderFactory.createLineBorder(ConstColors.BORDER));
-        this.fourmiliere = f;
+        this.anthill = f;
         this.shiftOn = false;
         this.addKeyListener(this);
         this.addMouseListener(this);
@@ -37,8 +41,8 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         super.paintComponent(g);
         int width = this.getWidth();
         int height = this.getHeight();
-        int largeur = this.fourmiliere.getLargeur();
-        int hauteur = this.fourmiliere.getHauteur();
+        int largeur = this.anthill.getLargeur();
+        int hauteur = this.anthill.getHauteur();
         for (int i = 0; i < largeur; i++) {
             int curr = (width * i / largeur);
             int nextOffset = (width * (i + 1) / largeur) - (width * i / largeur);
@@ -46,7 +50,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
                 g.setColor(colorAtPos(i, j));
                 g.fillRect(curr, (height * j / hauteur), nextOffset,
                         (height * (j + 1) / hauteur) - (height * j / hauteur));
-                if (fourmiliere.contientFourmi(i, j)) {
+                if (anthill.contientFourmi(i, j)) {
                     g.setColor(Field.FOURMI);
                     g.fillOval(curr, (height * j / hauteur), nextOffset, nextOffset);
                 }
@@ -54,11 +58,18 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         }
     }
 
+    /**
+     * 
+     * @param x x coord in the anthill 
+     * @param y y coord in the anthill 
+     * @return the color at this position,
+     *  for instance Field.WALL if there is a wall
+     */
     private Color colorAtPos(int x, int y) {
-        if (this.fourmiliere.getMur(x, y)) {
+        if (this.anthill.getMur(x, y)) {
             return Field.WALL;
         } else {
-            int nb_graine = this.fourmiliere.getQteGraines(x, y);
+            int nb_graine = this.anthill.getQteGraines(x, y);
             if (nb_graine == 0) {
                 return Field.EMPTY;
             } else {
@@ -72,28 +83,49 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         }
     }
 
+    /**
+     * 
+     * @param evtPoint the precise point of the event append in pixel
+     * @return the matching point in the anthill
+     */
     private Point getCoordFromPoint(Point evtPoint){
         return new Point(
-            (int) ((int)((double)evtPoint.getX())/((double)this.getWidth()) * (double)this.fourmiliere.getLargeur()),
-            (int) ((int)((double)evtPoint.getY())/((double)this.getHeight()) * (double)this.fourmiliere.getHauteur())
+            (int) ((int)((double)evtPoint.getX())/((double)this.getWidth()) * (double)this.anthill.getLargeur()),
+            (int) ((int)((double)evtPoint.getY())/((double)this.getHeight()) * (double)this.anthill.getHauteur())
         );        
     }
 
+    /**
+     * set a wall at the given coordinates if there any wall before
+     * remove this wall otherwise
+     * @param p the point in the anthill
+     */
     private void destroyCreateWall(Point p){
-        this.fourmiliere.setMur(p.x, p.y, !this.fourmiliere.getMur(p.x, p.y));
+        this.anthill.setMur(p.x, p.y, !this.anthill.getMur(p.x, p.y));
         this.repaint();
     }
 
-    private void addFourmi(Point p){
-        this.fourmiliere.ajouteFourmi(p.x, p.y);
+    /**
+     * add an ant at the given coordinates
+     * @param p the point in the anthill
+     */
+    private void addAnt(Point p){
+        this.anthill.ajouteFourmi(p.x, p.y);
         this.repaint();
     }
 
-    private void addGraine(Point p, boolean adding){
+    /**
+     * add or remove one seed at the given coordinates
+     * @param p the point in the anthill
+     * @param adding if true add one seed else remove one (if possible in both case)
+     */
+    private void addSeed(Point p, boolean adding){
         int toAdd = (adding?1:-1);
-        this.fourmiliere.setQteGraines(p.x, p.y, this.fourmiliere.getQteGraines(p.x, p.y) + toAdd);
+        this.anthill.setQteGraines(p.x, p.y, this.anthill.getQteGraines(p.x, p.y) + toAdd);
         this.repaint();
     }
+
+    // === KeyListener === //
 
     @Override
     public void keyPressed(KeyEvent e) {
@@ -112,13 +144,15 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    // === MouseListener === //
+
     @Override
     public void mouseClicked(MouseEvent e) {
         // we only handle left click
         if(SwingUtilities.isLeftMouseButton(e)){
             Point coordOfClick = this.getCoordFromPoint(e.getPoint());
             if (this.shiftOn) {
-                this.addFourmi(coordOfClick);
+                this.addAnt(coordOfClick);
             } else {
                 this.destroyCreateWall(coordOfClick);
             }
@@ -140,9 +174,11 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
     @Override
     public void mouseReleased(MouseEvent e) {}
 
+    // === MouseWheelListener === //
+
     @Override
     public void mouseWheelMoved(MouseWheelEvent e){
-        this.addGraine(this.getCoordFromPoint(e.getPoint()), e.getWheelRotation() > 0);
+        this.addSeed(this.getCoordFromPoint(e.getPoint()), e.getWheelRotation() > 0);
     }
 
 }
