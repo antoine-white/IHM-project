@@ -302,6 +302,10 @@ public class Fourmiliere {
     return res;
   }
 
+  public static int getQMax(){
+    return Fourmiliere.QMAX;
+  }
+
   /**
    * Retourne une chaine affichant le le terrain (X pour un mur)
    * 
@@ -316,6 +320,8 @@ public class Fourmiliere {
     }
     return res;
   }
+
+
 
   /**
    * Exemple de main manipulant une fourmiliere de largeur 20 et de hauteur 10.
