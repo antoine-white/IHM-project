@@ -2,6 +2,7 @@ package model.terrain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.Iterator;
 
 /**
@@ -111,6 +112,16 @@ public class Fourmiliere {
    */
   public boolean contientFourmi(int x, int y) {
     return fourmis[y][x];
+  }
+
+  public boolean fourmiPorteuse(int x, int y) {
+    //checking if there is a ant at this position prevent execution error
+    return fourmis[y][x] && lesFourmis
+      .stream()
+      .filter((e -> (e.getX() == x) && (e.getY() == y)))
+      .collect(Collectors.toList())
+      .get(0)
+      .porte();
   }
 
   /**
