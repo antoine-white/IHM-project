@@ -102,7 +102,7 @@ public class MainFrame extends JFrame{
         box.add(new JLabel("Reinitialisation du jeu")); 
         box.add(Box.createVerticalStrut(10));
 
-        box.add(new RandomInitializationButton());
+        box.add(new RandomInitializationButton(this));
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation aleatoire ")); 
         return box;
@@ -133,6 +133,21 @@ public class MainFrame extends JFrame{
     public void cleanField(){
         this.fourmiliere = new Fourmiliere(this.fourmiliere.getLargeur(), this.fourmiliere.getHauteur());
         this.field.repaint();
+    }
+
+    public void newRandomField(float seed,float ant, float wall){
+        //we start by emptying the anthill
+        this.cleanField();
+        // then we fill the field according to the given probabilities
+        for (int i = 0; i < this.fourmiliere.getLargeur(); i++) {
+            for (int j = 0; j < this.fourmiliere.getHauteur(); j++) {                
+                this.fourmiliere.setMur(i, j, ((float)(Math.random()) <= wall));
+                this.fourmiliere.setQteGraines(i, j, ((float)(Math.random()) <= seed)?1:0);
+                if ((float)(Math.random()) <= ant) {
+                    this.fourmiliere.ajouteFourmi(i, j);
+                }
+            }
+        }
     }
 
     public Fourmiliere getFourmiliere() {

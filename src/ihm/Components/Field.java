@@ -18,6 +18,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
     private static final Color EMPTY = Color.WHITE;
     private static final Color GRAINE = Color.RED;
     private static final Color FOURMI = Color.GREEN;
+    private static final Color FOURMI_PORTEUSE = Color.BLUE;
     private static final int SHIFT_KEY_CODE = 16;
 
     /**
@@ -43,15 +44,16 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         int height = this.getHeight();
         int largeur = this.mainFrame.getFourmiliere().getLargeur();
         int hauteur = this.mainFrame.getFourmiliere().getHauteur();
-        for (int i = 0; i < largeur; i++) {
+        for (int i = 0; i < largeur+2; i++) {
             int curr = (width * i / largeur);
             int nextOffset = (width * (i + 1) / largeur) - (width * i / largeur);
-            for (int j = 0; j < hauteur; j++) {
+            for (int j = 0; j < hauteur+2; j++) {
                 g.setColor(colorAtPos(i, j));
                 g.fillRect(curr, (height * j / hauteur), nextOffset,
                         (height * (j + 1) / hauteur) - (height * j / hauteur));
                 if (mainFrame.getFourmiliere().contientFourmi(i, j)) {
-                    g.setColor(Field.FOURMI);
+                    // the color is different if the ant is carrying a seed
+                    g.setColor(mainFrame.getFourmiliere().fourmiPorteuse(i, j) ? Field.FOURMI_PORTEUSE :Field.FOURMI);
                     g.fillOval(curr, (height * j / hauteur), nextOffset, nextOffset);
                 }
             }
