@@ -113,7 +113,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
      */
     private void addAnt(Point p){
         this.mainFrame.getFourmiliere().ajouteFourmi(p.x, p.y);
-        this.repaint();
+        this.mainFrame.updateAntHill();
     }
 
     /**
@@ -124,7 +124,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
     private void addSeed(Point p, boolean adding){
         int toAdd = (adding?1:-1);
         this.mainFrame.getFourmiliere().setQteGraines(p.x, p.y, this.mainFrame.getFourmiliere().getQteGraines(p.x, p.y) + toAdd);
-        this.repaint();
+        this.mainFrame.updateAntHill();
     }
 
     // === KeyListener === //

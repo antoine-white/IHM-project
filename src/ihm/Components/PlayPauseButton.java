@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class PlayPauseButton extends JButton{
+public class PlayPauseButton extends CustomButton{
 
     //private static final String PAUSE_TXT = "Pause";
     //private static final String PLAY_TXT = "Jouer";

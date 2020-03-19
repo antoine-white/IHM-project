@@ -80,6 +80,10 @@ public class Fourmiliere {
     return hauteur;
   }
 
+  public int getNbFourmi(){
+    return lesFourmis.size();
+  }
+
   /**
    * Presence d'un mur au point (x,y) du terrain
    * 

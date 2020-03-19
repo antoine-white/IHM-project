@@ -4,7 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class QuitButton extends JButton {
+public class QuitButton extends CustomButton {
 
     public QuitButton() {
         super(); 

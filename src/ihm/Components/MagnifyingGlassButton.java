@@ -6,7 +6,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
-public class MagnifyingGlassButton extends JButton {
+public class MagnifyingGlassButton extends CustomButton {
 
     public class ClickAction implements MouseListener {
 

@@ -7,7 +7,7 @@ import model.terrain.Fourmiliere;
 
 import java.awt.event.*;
 
-public class ReinitializationButton extends JButton {
+public class ReinitializationButton extends CustomButton {
 
     public ReinitializationButton(MainFrame mainFrame) {
         //super("Reinitialisation du jeu ");
