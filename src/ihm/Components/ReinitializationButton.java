@@ -23,7 +23,8 @@ public class ReinitializationButton extends CustomButton {
         //this.setBorder(BorderFactory.createEmptyBorder());
         this.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                         
+                if (mainFrame.getSimulationRunning()) return;
                 int reponse = JOptionPane.showConfirmDialog(null, "Voulez vous vraiment réinitialiser ? ", null, JOptionPane.YES_NO_OPTION);
                 if (reponse == 0) {
                     mainFrame.cleanField();

@@ -10,6 +10,7 @@ import ihm.consts.*;
 
 public class MainFrame extends JFrame{
 
+    private boolean simulationRunning;
     private JLabel title;
     private Field field;
     private LabelList labelList;
@@ -31,6 +32,7 @@ public class MainFrame extends JFrame{
     }
     public MainFrame(){
         super();
+        this.simulationRunning = false;
         this.currAnthillDim = MainFrame.DEFAULT_ANTHILL;
         this.fourmiliere = new Fourmiliere((int)currAnthillDim.getWidth(), (int)currAnthillDim.getHeight());
         this.setBackground(ConstColors.BACKGROUND);
@@ -174,11 +176,17 @@ public class MainFrame extends JFrame{
         return this.magnifyingGlassButton;
     }
 
+    public boolean getSimulationRunning(){
+        return simulationRunning;
+    }
+    
     public void startSimulation(){        
+        this.simulationRunning = true;
         this.simulationThread.start();
     }
 
-    public void endSimulation(){        
+    public void endSimulation(){    
+        this.simulationRunning = false;   
         this.simulationThread.interrupt();
     }
 }

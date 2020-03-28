@@ -40,7 +40,7 @@ public class PlayPauseButton extends CustomButton{
     }
 
     private void setJButtonIcon(Boolean isIconPlay){
-        if(isIconPlay){
+        if(!isIconPlay){
             ImageIcon img = new ImageIcon(ConstPaths.IMAGE_PATH + "circleplay.png");
             Image newimg = img.getImage().getScaledInstance( 85, 70,  java.awt.Image.SCALE_SMOOTH ) ;  
             ImageIcon tmp = new ImageIcon(newimg);

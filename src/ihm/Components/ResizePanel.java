@@ -25,7 +25,8 @@ public class ResizePanel extends JPanel {
 
             private static final int ERROR = -1;
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                         
+                if (mFrame.getSimulationRunning()) return;
                 int tmpX = checkInput(ResizePanel.MAX_HEIGHT, tFieldX.getText());
                 if (tmpX == ERROR) return;
                 int tmpY = checkInput(ResizePanel.MAX_WIDTH, tFieldY.getText());

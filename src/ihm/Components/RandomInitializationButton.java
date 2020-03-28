@@ -19,7 +19,8 @@ public class RandomInitializationButton extends CustomButton {
         this.addActionListener(new ActionListener() {
             private static final float ERROR = -1.0f;
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {                
+                if (mainFrame.getSimulationRunning()) return;
                 float seed;
                 float ant;
                 float wall;
