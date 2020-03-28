@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 import model.terrain.*;
+import ihm.Runnable.SimulationRunner;
 import ihm.consts.*;
 
 public class MainFrame extends JFrame{
@@ -14,6 +15,10 @@ public class MainFrame extends JFrame{
     private LabelList labelList;
     private Dimension currAnthillDim;
     private Fourmiliere fourmiliere;
+    private MagnifyingGlassButton magnifyingGlassButton;
+
+    private SimulationRunner simulationRunner;
+    private Thread simulationThread;
 
     private static final String TITTLE_STRING = "Simulation de fourmilliere";
     private static final Dimension DEFAULT_ANTHILL = new Dimension(100,100);
@@ -34,6 +39,7 @@ public class MainFrame extends JFrame{
         this.title.setFont(ConstFonts.TITLE);
         this.field = new Field(this);
         this.labelList = new LabelList();
+        this.magnifyingGlassButton = new MagnifyingGlassButton();
         this.createMainLayout(); 
         this.frameParameter();
         this.setFrameIcon();
@@ -41,7 +47,9 @@ public class MainFrame extends JFrame{
         //this.setIconImages(new ImageIcon("ihm/Resources/fourmi_logo.png").getImage());
         //this.createMainLayout(this.panel);
         //this.add(panel);
-        this.updateAntHill();
+        this.simulationRunner = new SimulationRunner(this);
+        
+        this.simulationThread = new Thread(this.simulationRunner);
     }
     private void setFrameIcon(){
         Toolkit kit = Toolkit.getDefaultToolkit();
@@ -96,11 +104,11 @@ public class MainFrame extends JFrame{
     }
     private Box rightVerticalBox(){
         Box box = Box.createVerticalBox();
-        box.add(new MagnifyingGlassButton());
+        box.add(this.magnifyingGlassButton);
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("    Loupe")); 
         box.add(Box.createVerticalStrut(10));
-        box.add(new PlayPauseButton());
+        box.add(new PlayPauseButton(this));
         box.add(Box.createVerticalStrut(10));
         box.add(this.labelList);
         return box;
@@ -125,8 +133,8 @@ public class MainFrame extends JFrame{
         //we start by emptying the anthill
         this.cleanField();
         // then we fill the field according to the given probabilities
-        for (int i = 0; i < this.fourmiliere.getLargeur(); i++) {
-            for (int j = 0; j < this.fourmiliere.getHauteur(); j++) {                
+        for (int i = 1; i < this.fourmiliere.getLargeur(); i++) {
+            for (int j = 1; j < this.fourmiliere.getHauteur(); j++) {                
                 this.fourmiliere.setMur(i, j, ((float)(Math.random()) <= wall));
                 this.fourmiliere.setQteGraines(i, j, ((float)(Math.random()) <= seed)?Fourmiliere.getQMax():0);
                 if ((float)(Math.random()) <= ant) {
@@ -160,5 +168,17 @@ public class MainFrame extends JFrame{
 
     public Fourmiliere getFourmiliere() {
         return fourmiliere;
+    }
+
+    public MagnifyingGlassButton getMagnifyingGlassButton(){
+        return this.magnifyingGlassButton;
+    }
+
+    public void startSimulation(){        
+        this.simulationThread.start();
+    }
+
+    public void endSimulation(){        
+        this.simulationThread.interrupt();
     }
 }

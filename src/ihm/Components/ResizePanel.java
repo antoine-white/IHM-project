@@ -13,13 +13,14 @@ public class ResizePanel extends JPanel {
     private JTextField tFieldX;
     private JTextField tFieldY;
 
+    private static final String BUTTON_TXT = "Changer de taille";
     private static final int MAX_HEIGHT = 200;
     private static final int MAX_WIDTH = 200;
 
     public ResizePanel(MainFrame mFrame) {
         super(); 
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-        this.validate = new CustomButton("Resize");
+        this.validate = new CustomButton(ResizePanel.BUTTON_TXT);
         this.validate.addActionListener(new ActionListener() {
 
             private static final int ERROR = -1;
@@ -29,7 +30,9 @@ public class ResizePanel extends JPanel {
                 if (tmpX == ERROR) return;
                 int tmpY = checkInput(ResizePanel.MAX_WIDTH, tFieldY.getText());
                 if (tmpY == ERROR) return;
-                mFrame.resizeAntHill(new Dimension(tmpX,tmpY));
+                int tmp = JOptionPane.showConfirmDialog(null, "Voulez vous changer la taille du plateau ? ", null, JOptionPane.YES_NO_OPTION);
+                if (tmp == 0) 
+                    mFrame.resizeAntHill(new Dimension(tmpX,tmpY));
             }
 
             private int checkInput(int max, String input){

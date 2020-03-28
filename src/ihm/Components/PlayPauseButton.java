@@ -7,32 +7,31 @@ public class PlayPauseButton extends CustomButton{
 
     //private static final String PAUSE_TXT = "Pause";
     //private static final String PLAY_TXT = "Jouer";
-    private static boolean isPlay; 
+    private boolean isPlay; 
+    private MainFrame mainFrame;
 
     //TODO : relier à la simulation 
-    public PlayPauseButton(){
+    public PlayPauseButton(MainFrame mainFrame){
         //super(PlayPauseButton.PAUSE_TXT);
         super(); 
-        PlayPauseButton.isPlay = true;
-        this.setJButtonIcon(PlayPauseButton.isPlay);
+        this.isPlay = false;
+        this.mainFrame = mainFrame;
+        this.setJButtonIcon(this.isPlay);
         this.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {/*
-                PlayPauseButton emitter = ((PlayPauseButton)e.getSource());
-                if (emitter.getText() == PlayPauseButton.PAUSE_TXT) {
-                    emitter.setText(PlayPauseButton.PLAY_TXT);
-                    //TODO start simulation
-                } else {
-                    emitter.setText(PlayPauseButton.PAUSE_TXT);
-                    //TODO end simualtion
-                }*/
+            public void actionPerformed(ActionEvent e) {
                 PlayPauseButton emitter = ((PlayPauseButton)e.getSource());
                 Boolean isPlay = emitter.getIsPlay();  
                 if (isPlay) {
                     emitter.setJButtonIcon(false);
                     emitter.setIsPlay(false);
+                    
+                    System.out.println("loll");
+                    mainFrame.endSimulation();
                 } else {
                     emitter.setJButtonIcon(true);
                     emitter.setIsPlay(true);
+                    System.out.println("lolllll");
+                    mainFrame.startSimulation();
                 }
             }
         }); 
@@ -60,7 +59,7 @@ public class PlayPauseButton extends CustomButton{
     }
 
     public void setIsPlay(boolean isPlay) {
-        PlayPauseButton.isPlay = isPlay;
+        this.isPlay = isPlay;
     }
 
     
