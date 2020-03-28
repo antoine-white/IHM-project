@@ -1,5 +1,5 @@
 # IHM-project
-projet d'IHM de L3 Informatiques
+projet d'IHM de L3 Informatique
 
 ## Compilation ##
 En ligne de commande 
