@@ -44,7 +44,7 @@ public class MainFrame extends JFrame{
         this.frameParameter();
         this.setFrameIcon();
         this.setTitle("Logiciel Mehdi-Antoine");        
-        //this.setIconImages(new ImageIcon("ihm/Resources/fourmi_logo.png").getImage());
+        //this.setIconImages(new ImageIcon(ConstPaths.IMAGE_PATH + "fourmi_logo.png").getImage());
         //this.createMainLayout(this.panel);
         //this.add(panel);
         this.simulationRunner = new SimulationRunner(this);
@@ -53,7 +53,7 @@ public class MainFrame extends JFrame{
     }
     private void setFrameIcon(){
         Toolkit kit = Toolkit.getDefaultToolkit();
-        Image tmp = kit.getImage("ihm/Resources/m_logo.jpg");
+        Image tmp = kit.getImage(ConstPaths.IMAGE_PATH + "m_logo.jpg");
         Image icone = tmp.getScaledInstance( 48, 48,  java.awt.Image.SCALE_SMOOTH ) ;  
         this.setIconImage(icone);
     }

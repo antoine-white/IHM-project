@@ -4,12 +4,14 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
+import ihm.consts.ConstPaths;
+
 public class RandomInitializationButton extends CustomButton {
 
     public RandomInitializationButton(MainFrame mainFrame) {
         // super("Reinitialisation aleatoire ");
         super();
-        ImageIcon img = new ImageIcon("ihm/Resources/dice.png");
+        ImageIcon img = new ImageIcon(ConstPaths.IMAGE_PATH + "dice.png");
         Image newimg = img.getImage().getScaledInstance(85, 70, java.awt.Image.SCALE_SMOOTH);
         ImageIcon tmp = new ImageIcon(newimg);
         this.setIcon(tmp);

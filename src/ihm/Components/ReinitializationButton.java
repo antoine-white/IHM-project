@@ -5,6 +5,8 @@ import javax.swing.*;
 
 import model.terrain.Fourmiliere;
 
+import ihm.consts.ConstPaths;
+
 import java.awt.event.*;
 
 public class ReinitializationButton extends CustomButton {
@@ -12,7 +14,7 @@ public class ReinitializationButton extends CustomButton {
     public ReinitializationButton(MainFrame mainFrame) {
         //super("Reinitialisation du jeu ");
         super(); 
-        ImageIcon img = new ImageIcon("ihm/Resources/initialization.png");
+        ImageIcon img = new ImageIcon(ConstPaths.IMAGE_PATH + "initialization.png");
         Image newimg = img.getImage().getScaledInstance( 85, 70,  java.awt.Image.SCALE_SMOOTH ) ;  
         ImageIcon tmp = new ImageIcon( newimg );
         this.setIcon(tmp); 
