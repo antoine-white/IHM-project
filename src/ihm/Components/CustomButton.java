@@ -1,10 +1,12 @@
 package ihm.Components;
 
 import javax.swing.*;
-
-
 import ihm.consts.*;
 
+/**
+ * All button in this application should 
+ * inherit from it 
+ */
 public class CustomButton extends JButton {
 
     public CustomButton(String str) {

@@ -6,12 +6,14 @@ import java.awt.event.*;
 
 import ihm.consts.ConstPaths;
 
+/**
+ * Button to quit the application
+ */
 public class QuitButton extends CustomButton {
 
     public QuitButton() {
         super(); 
         ImageIcon img = new ImageIcon(ConstPaths.IMAGE_PATH + "quit_logo.jpg");
-        //ImageIcon img = new ImageIcon("C:/Users/RKoub/Desktop/wallpaper/13694.jpg");
         Image newimg = img.getImage().getScaledInstance( 50, 50,  java.awt.Image.SCALE_SMOOTH ) ;  
         ImageIcon tmp = new ImageIcon( newimg );
         this.setIcon(tmp); 
@@ -25,10 +27,7 @@ public class QuitButton extends CustomButton {
                     System.exit(0);
             }
         });
-        validate();
-       
-    }
-
-    
+        validate();       
+    }   
 
 }

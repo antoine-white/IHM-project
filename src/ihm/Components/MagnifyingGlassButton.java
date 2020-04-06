@@ -6,6 +6,10 @@ import java.awt.event.*;
 
 import ihm.consts.ConstPaths;
 
+/**
+ * Button that open a little window that zoom on 
+ * a specific spot of the simulation
+ */
 public class MagnifyingGlassButton extends CustomButton {
 
     private ZoomFrame zoomFrame;
@@ -26,6 +30,10 @@ public class MagnifyingGlassButton extends CustomButton {
         });
     }
 
+    /**
+     * 
+     * @return the frame that this button opens
+     */
     public ZoomFrame getZoomFrame(){
         return this.zoomFrame;
     }

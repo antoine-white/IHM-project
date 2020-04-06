@@ -2,11 +2,13 @@ package ihm.Components;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 import model.terrain.Fourmiliere;
 
-import java.awt.event.*;
-
+/**
+ * This Frame zooms on a specific spot of the simulation
+ */
 public class ZoomFrame extends JFrame{
     private static final String TITLE = "Fenetre de zoom";
     private static final Dimension DIMENSION = new Dimension(330,330);

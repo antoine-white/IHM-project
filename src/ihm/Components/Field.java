@@ -7,6 +7,9 @@ import java.awt.event.*;
 import model.terrain.*;
 import ihm.consts.*;
 
+/**
+ * This is the components that displays the simulation
+ */
 public class Field extends JPanel implements KeyListener, MouseListener, MouseWheelListener, MouseMotionListener {
 
     private MainFrame mainFrame;
@@ -18,7 +21,7 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
 
     /**
      * 
-     * @param f
+     * @param mFrame
      */
     public Field(MainFrame mFrame) {
         super();
@@ -125,6 +128,11 @@ public class Field extends JPanel implements KeyListener, MouseListener, MouseWh
         this.mainFrame.updateAntHill();
     }
 
+    /**
+     * Handle clicks from click and drag of the mouse 
+     * Only cares about left click
+     * @param e 
+     */
     private void handleClick(MouseEvent e){
         // we only handle left click
         if (SwingUtilities.isLeftMouseButton(e)) {
