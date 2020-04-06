@@ -1,13 +1,16 @@
 package ihm.Components;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import model.terrain.*;
 import ihm.Thread.SimulationThread;
 import ihm.consts.*;
 
+/**
+ * mother frame of the application
+ * also the entry point i.e the main method is here
+ */
 public class MainFrame extends JFrame {
 
     private boolean simulationRunning;
@@ -34,6 +37,7 @@ public class MainFrame extends JFrame {
 
     public MainFrame() {
         super();
+        //the simulation is off at the start
         this.simulationRunning = false;
         this.currAnthillDim = MainFrame.DEFAULT_ANTHILL;
         this.fourmiliere = new Fourmiliere((int) currAnthillDim.getWidth(), (int) currAnthillDim.getHeight());
@@ -44,14 +48,12 @@ public class MainFrame extends JFrame {
         this.field = new Field(this);
         this.labelList = new LabelList();
         this.magnifyingGlassButton = new MagnifyingGlassButton();
+        //create the layout of this component
         this.createMainLayout();
+        //set sizes parameters for this component
         this.frameParameter();
         this.setFrameIcon();
         this.setTitle("Logiciel Mehdi-Antoine");
-        // this.setIconImages(new ImageIcon(ConstPaths.IMAGE_PATH +
-        // "fourmi_logo.png").getImage());
-        // this.createMainLayout(this.panel);
-        // this.add(panel);
     }
 
     private void setFrameIcon() {
@@ -65,7 +67,6 @@ public class MainFrame extends JFrame {
         this.setPreferredSize(new Dimension(800, 750));
         this.setMinimumSize(new Dimension(800, 650));
         this.setLocationRelativeTo(null);
-        // this.setResizable(false);
     }
 
     private void createMainLayout() {
@@ -74,12 +75,9 @@ public class MainFrame extends JFrame {
         this.add(centralBox(leftVerticalBox(), this.field, rightVerticalBox()), BorderLayout.CENTER);
     }
 
-    /*
-     * private void createMainLayout(JPanel pan){
-     * pan.add(titleBox(),BorderLayout.NORTH);
-     * pan.add(centralBox(leftVerticalBox(),new
-     * Field(),rightVerticalBox()),BorderLayout.CENTER);
-     * pan.add(quitBox(),BorderLayout.SOUTH); }
+    /**
+     * 
+     * @return a box with the title center horizontally
      */
     private Box titleBox() {
         Box box = Box.createHorizontalBox();
@@ -89,6 +87,10 @@ public class MainFrame extends JFrame {
         return box;
     }
 
+    /**
+     * 
+     * @return a box with the button to quit the application in the right corner
+     */
     private Box quitBox() {
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
@@ -96,6 +98,13 @@ public class MainFrame extends JFrame {
         return box;
     }
 
+    /**
+     * 
+     * @return a box with (from top to bottom):
+     * _the resize field panel
+     * _the ReinitializationButton
+     * _the RandomInitializationButton
+     */
     private Box leftVerticalBox() {
         Box box = Box.createVerticalBox();
         box.add(new ResizePanel(this));
@@ -104,7 +113,6 @@ public class MainFrame extends JFrame {
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation du jeu"));
         box.add(Box.createVerticalStrut(10));
-
         box.add(new RandomInitializationButton(this));
         box.add(Box.createVerticalStrut(5));
         box.add(new JLabel("Reinitialisation aleatoire "));
@@ -125,7 +133,6 @@ public class MainFrame extends JFrame {
 
     private Box centralBox(Box b1, Field field, Box b2) {
         Box box = Box.createHorizontalBox();
-        // box.add(Box.createHorizontalStrut(20));
         box.add(b1);
         box.add(Box.createHorizontalStrut(5));
         box.add(field);
@@ -134,11 +141,20 @@ public class MainFrame extends JFrame {
         return box;
     }
 
+    /**
+     * create a new Fourmiliere object and redraw the field
+     */
     public void cleanField() {
         this.fourmiliere = new Fourmiliere(this.fourmiliere.getLargeur(), this.fourmiliere.getHauteur());
         this.updateAntHill();
     }
 
+    /**
+     * create a new Fourmiliere object with given probabilities and redraw the field 
+     * @param seed the probability of the maximum of seeds at any point in the anthill
+     * @param ant the probability of an ant at any point in the anthill
+     * @param wall the probability of a wall at any point in the anthill
+     */
     public void newRandomField(float seed, float ant, float wall) {
         // we start by emptying the anthill
         this.cleanField();
@@ -155,17 +171,28 @@ public class MainFrame extends JFrame {
         this.updateAntHill();
     }
 
+    /**
+     * create a new Fourmiliere object with the given dimension and redraw the field
+     * @param newDimension
+     */
     public void resizeAntHill(Dimension newDimension) {
         this.currAnthillDim = newDimension;
         this.fourmiliere = new Fourmiliere((int) currAnthillDim.getWidth(), (int) currAnthillDim.getHeight());
         this.updateAntHill();
     }
 
+    /**
+     * redraw the field and update the information labels
+     */
     public void updateAntHill() {
         this.labelList.setTextLbl(this.getNbGraine(), this.fourmiliere.getNbFourmi());
         this.field.repaint();
     }
 
+    /**
+     * 
+     * @return the number of seed in the anthill
+     */
     private int getNbGraine() {
         int total = 0;
         for (int i = 0; i < this.fourmiliere.getHauteur(); i++) {
@@ -197,6 +224,5 @@ public class MainFrame extends JFrame {
     public void endSimulation() {
         this.simulationRunning = false;
         this.simulationThread.interrupt();
-        System.out.println("Fin du Thread");
     }
 }
