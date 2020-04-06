@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 
 import model.terrain.*;
-import ihm.Runnable.SimulationRunner;
 import ihm.Thread.SimulationThread;
 import ihm.consts.*;
 
@@ -21,6 +20,7 @@ public class MainFrame extends JFrame {
 
     private SimulationThread simulationThread;
 
+    private static final int threadSleep = 100;//in millisecond
     private static final String TITTLE_STRING = "Simulation de fourmilliere";
     private static final Dimension DEFAULT_ANTHILL = new Dimension(100, 100);
 
@@ -189,7 +189,7 @@ public class MainFrame extends JFrame {
     }
 
     public void startSimulation() {
-        this.simulationThread = new SimulationThread(this);
+        this.simulationThread = new SimulationThread(this,this.threadSleep);
         this.simulationRunning = true;
         this.simulationThread.start();
     }
