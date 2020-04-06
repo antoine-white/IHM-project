@@ -32,8 +32,7 @@ public class LabelList extends Box{
     public void setTextLbl(int nbSeed, int nbAnt){
         this.labels[0].setText(LabelList.SEED_STR + nbSeed);
         this.labels[1].setText(LabelList.ANT_STR + nbAnt);
-    }
-    
+    }   
 
 }
 

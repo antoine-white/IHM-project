@@ -2,10 +2,9 @@ package ihm.Components;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
 import ihm.consts.ConstColors;
-
-import java.awt.event.*;
 
 public class ResizePanel extends JPanel {
 
@@ -36,6 +35,13 @@ public class ResizePanel extends JPanel {
                     mFrame.resizeAntHill(new Dimension(tmpX,tmpY));
             }
 
+            /**
+             * 
+             * @param max 
+             * @param input the string given by the user
+             * @return the input string as integer if it can be converted to integer and 
+             * is in [0..max]
+             */
             private int checkInput(int max, String input){
                 int res;
                 try {
@@ -73,6 +79,12 @@ public class ResizePanel extends JPanel {
         this.add(Box.createVerticalStrut(10));
     }
 
+    /**
+     * 
+     * @param txt the text of the JLabel
+     * @param textField the textField that is in the returned box
+     * @return A box that has a label with the given txt (as a label) and textField
+     */
     private Box jTextBox(String txt, JTextField textField){
         Box b = Box.createHorizontalBox();
         b.add(new JLabel(txt));
